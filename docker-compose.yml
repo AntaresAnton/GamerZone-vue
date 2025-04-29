@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tienda-gaming
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    # Volúmenes para desarrollo (opcional)
+    # volumes:
+    #   - ./src:/app/src
+    environment:
+      - NODE_ENV=production
+    networks:
+      - tienda-network
+
+  # Si necesitas un backend o base de datos, puedes agregarlo aquí
+  # backend:
+  #   image: ...
+  #   ...
+
+networks:
+  tienda-network:
+    driver: bridge

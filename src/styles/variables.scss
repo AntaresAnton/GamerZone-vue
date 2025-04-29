@@ -1,0 +1,24 @@
+// Variables de colores personalizados
+$primary: #7b4cff;
+$secondary: #ff4c8e;
+$dark: #121212;
+$light: #f8f9fa;
+$accent: #00e5ff;
+
+// Sobrescribir variables de Bootstrap
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "dark": $dark,
+  "light": $light,
+  "accent": $accent,
+);
+
+// Otras variables personalizadas
+$border-radius: 0.5rem;
+$box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+$transition-base: all 0.3s ease-in-out;
+
+// Fuentes
+$font-family-base: 'Poppins', sans-serif;
+$headings-font-weight: 600;

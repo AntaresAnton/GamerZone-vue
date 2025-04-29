@@ -1,0 +1,66 @@
+@import "variables";
+@import "bootstrap/scss/bootstrap";
+
+// Estilos globales
+body {
+  background-color: #f0f2f5;
+  color: $dark;
+  font-family: $font-family-base;
+}
+
+.card {
+  border: none;
+  transition: $transition-base;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $box-shadow;
+  }
+}
+
+.btn {
+  border-radius: $border-radius;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  
+  &-primary, &-secondary {
+    color: $light;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.section-title {
+  position: relative;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 50px;
+    height: 4px;
+    background: $primary;
+    border-radius: 2px;
+  }
+}
+
+.accent-gradient {
+  background: linear-gradient(45deg, $primary, $secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-dark-gradient {
+  background: linear-gradient(to right, $dark, lighten($dark, 10%));
+}
+
+// Animaciones personalizadas para AOS
+[data-aos] {
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+}
