@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Arquitectura para eCommerce con Vue.js</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Prism CSS for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #42b883 0%, #35495e 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .architecture-diagram {
+            max-width: 100%;
+            height: auto;
+        }
+        pre {
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem !important;
+        }
+        .section-divider {
+            height: 5px;
+            background: linear-gradient(90deg, #42b883, #35495e);
+            margin: 3rem 0;
+            border-radius: 5px;
+        }
+        .vue-color {
+            color: #42b883;
+        }
+        .nuxt-color {
+            color: #00C58E;
+        }
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .comparison-table th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold mb-4">
+                <i class="bi bi-cart4 me-2"></i> Arquitectura para eCommerce con Vue.js
+            </h1>
+            <p class="lead">Guía completa para desarrollar una tienda online moderna con Vue, Vuex, APIs y Nuxt.js</p>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">GameZone Vue</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#arquitectura"><i class="bi bi-diagram-3"></i> Arquitectura</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#vue-vuex"><i class="bi bi-braces"></i> Vue y Vuex</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#apis"><i class="bi bi-hdd-network"></i> REST vs GraphQL</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nuxtjs"><i class="bi bi-lightning"></i> Nuxt.js</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <!-- Arquitectura Front/Backend -->
+        <section id="arquitectura" class="mb-5">
+            <h2 class="display-5 mb-4 vue-color">
+                <i class="bi bi-diagram-3"></i> Arquitectura para eCommerce con Vue
+            </h2>
+            
+            <div class="row mb-5">
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-dark text-white">
+                            <h3 class="h4 mb-0"><i class="bi bi-layers"></i> Opción 1: Frontend Vue + Backend API</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="h5 text-success"><i class="bi bi-check-circle"></i> Recomendada</h4>
+                            <p>Esta es la arquitectura más común y recomendada para eCommerce:</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><strong>Frontend:</strong> Aplicación Vue que maneja la interfaz de usuario</li>
+                                <li class="list-group-item"><strong>Backend:</strong> API REST o GraphQL que gestiona:</li>
+                                <li class="list-group-item ps-5">
+                                    <i class="bi bi-shield-lock me-2"></i> Autenticación/autorización
+                                </li>
+                                <li class="list-group-item ps-5">
+                                    <i class="bi bi-credit-card me-2"></i> Procesamiento de pagos
+                                </li>
+                                <li class="list-group-item ps-5">
+                                    <i class="bi bi-box-seam me-2"></i> Gestión de inventario
+                                </li>
+                                <li class="list-group-item ps-5">
+                                    <i class="bi bi-database me-2"></i> Persistencia de datos
+                                </li>
+                            </ul>
+                            <h5>Ventajas:</h5>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-success"><i class="bi bi-check-lg"></i></div>
+                                <div>Mayor escalabilidad</div>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-success"><i class="bi bi-check-lg"></i></div>
+                                <div>Mejor mantenibilidad</div>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-success"><i class="bi bi-check-lg"></i></div>
+                                <div>Posibilidad de tener múltiples clientes (web, móvil, etc.)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-dark text-white">
+                            <h3 class="h4 mb-0"><i class="bi bi-stack"></i> Opción 2: Solución Fullstack con Vue</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Alternativas para un enfoque más integrado:</p>
+                            <div class="mb-4">
+                                <h5><i class="bi bi-lightning-fill text-success"></i> Nuxt.js</h5>
+                                <p>Framework basado en Vue que permite SSR (Server-Side Rendering)</p>
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle-fill"></i> Ideal para eCommerce por sus ventajas en SEO
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h5><i class="bi bi-code-slash text-success"></i> Vue con Express/Node.js</h5>
+                                <p>Integrando Vue directamente con un backend Node</p>
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle-fill"></i> Buena opción si tu equipo domina JavaScript
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow mb-5">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-diagram-2"></i> Arquitectura Recomendada</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img src="https://miro.medium.com/max/1400/1*oPL8C-i04sqAUoOS_da9aA.jpeg" alt="Arquitectura Vue + API" class="img-fluid rounded architecture-diagram mb-3">
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Componentes clave:</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="badge bg-success rounded-pill me-2">1</span>
+                                    <strong>Frontend:</strong> Vue + Vuex + Vue Router
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="badge bg-success rounded-pill me-2">2</span>
+                                    <strong>Backend:</strong> API REST/GraphQL (Node.js, Django, Laravel, etc.)
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="badge bg-success rounded-pill me-2">3</span>
+                                    <strong>Comunicación:</strong> Axios o Fetch para conectar con la API
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="badge bg-success rounded-pill me-2">4</span>
+                                    <strong>Autenticación:</strong> JWT o OAuth
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="badge bg-success rounded-pill me-2">5</span>
+                                    <strong>Pagos:</strong> Integración con pasarelas como Stripe, PayPal, etc.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-code-square"></i> Implementación en Vuex</h3>
+                </div>
+                <div class="card-body">
+                    <p>Para implementar esta arquitectura, necesitarías modificar tu store actual para que, en lugar de tener datos estáticos, haga peticiones a tu API:</p>
+                    <pre><code class="language-javascript">import { createStore } from "vuex";
+import axios from "axios";
+
+export default createStore({
+  state: {
+    products: [],
+    cart: [],
+    loading: false,
+    error: null
+  },
+  mutations: {
+    SET_PRODUCTS(state, products) {
+      state.products = products;
+    },
+    SET_LOADING(state, status) {
+      state.loading = status;
+    },
+    SET_ERROR(state, error) {
+      state.error = error;
+    }
+    // Más mutaciones...
+  },
+  actions: {
+    async fetchProducts({ commit }) {
+      commit('SET_LOADING', true);
+      try {
+        const response = await axios.get('https://tu-api.com/products');
+        commit('SET_PRODUCTS', response.data);
+      } catch (error) {
+        commit('SET_ERROR', error.message);
+      } finally {
+        commit('SET_LOADING', false);
+      }
+    }
+    // Más acciones...
+  }
+});</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <div class="section-divider"></div>
+        
+        <!-- Vue y Vuex -->
+        <section id="vue-vuex" class="mb-5">
+            <h2 class="display-5 mb-4 vue-color">
+                <i class="bi bi-braces"></i> Diferencia entre Vue y Vuex
+            </h2>
+            
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="h4 mb-0"><i class="bi bi-window"></i> Vue.js</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-code-slash tech-icon vue-color"></i>
+                            </div>
+                            <h4>Framework progresivo para UI</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Maneja el ciclo de vida de componentes
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Sistema de renderizado reactivo
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Gestión de eventos y propiedades
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Es la base de tu aplicación
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="h4 mb-0"><i class="bi bi-database"></i> Vuex</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-diagram-3 tech-icon text-primary"></i>
+                            </div>
+                            <h4>Gestor de estado para Vue</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    Centraliza el estado de la aplicación
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    Similar a Redux en React
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    Almacena datos globales (productos, carrito, etc.)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    Gestiona la lógica de negocio centralizada
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-cart4"></i> Uso en eCommerce</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h4>Vue maneja:</h4>
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item">
+                                    <i class="bi bi-grid me-2 text-success"></i>
+                                    Listado de productos
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-eye me-2 text-success"></i>
+                                    Vistas de detalle
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-cart me-2 text-success"></i>
+                                    Interfaz del carrito
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-credit-card me-2 text-success"></i>
+                                    Formularios de pago
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Vuex gestiona:</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-box me-2 text-primary"></i>
+                                    Catálogo de productos
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-cart-check me-2 text-primary"></i>
+                                    Productos en el carrito
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-person-badge me-2 text-primary"></i>
+                                    Estado de autenticación
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-funnel me-2 text-primary"></i>
+                                    Filtros de productos
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="section-divider"></div>
+        
+        <!-- REST vs GraphQL -->
+        <section id="apis" class="mb-5">
+            <h2 class="display-5 mb-4 vue-color">
+                <i class="bi bi-hdd-network"></i> Diferencia entre API REST y GraphQL
+            </h2>
+            
+            <div class="row mb-5">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-info text-white">
+                            <h3 class="h4 mb-0"><i class="bi bi-distribute-horizontal"></i> API REST</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-link-45deg tech-icon text-info"></i>
+                            </div>
+                            <h4>Características principales</h4>
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item">
+                                    <i class="bi bi-folder2 me-2 text-info"></i>
+                                    <strong>Basada en recursos:</strong> Cada endpoint representa un recurso
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-arrow-left-right me-2 text-info"></i>
+                                    <strong>Métodos HTTP:</strong> GET, POST, PUT, DELETE
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-grid-3x3 me-2 text-info"></i>
+                                    <strong>Estructura fija:</strong> Cada endpoint devuelve una estructura predefinida
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-signpost-split me-2 text-info"></i>
+                                    <strong>Múltiples endpoints:</strong> Diferentes URLs para diferentes recursos
+                                </li>
+                            </ul>
+                            
+                            <h5>Ejemplo para GameZone:</h5>
+                            <pre><code class="language-http">GET /products                 # Obtener todos los productos
+GET /products/1               # Obtener detalles del PlayStation 5
+GET /products?category=consolas  # Filtrar productos por categoría
+POST /cart                    # Añadir producto al carrito
+GET /cart                     # Ver el carrito</code></pre>
+                        </div>
+                        <div class="card-footer">
+                            <h5>Ventajas</h5>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-info"><i class="bi bi-check-lg"></i></div>
+                                <div>Fácil de entender y ampliamente adoptado</div>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-info"><i class="bi bi-check-lg"></i></div>
+                                <div>Cacheable: resultados fácilmente cacheables</div>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-info"><i class="bi bi-check-lg"></i></div>
+                                <div>Estándar maduro con muchas herramientas</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-secondary text-white">
+                            <h3 class="h4 mb-0"><i class="bi bi-diagram-2"></i> GraphQL</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-bounding-box tech-icon text-secondary"></i>
+                            </div>
+                            <h4>Características principales</h4>
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item">
+                                    <i class="bi bi-door-open me-2 text-secondary"></i>
+                                    <strong>Un solo endpoint:</strong> Típicamente un único punto de entrada
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-search me-2 text-secondary"></i>
+                                    <strong>Consultas específicas:</strong> El cliente especifica qué datos necesita
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-card-checklist me-2 text-secondary"></i>
+                                    <strong>Tipado fuerte:</strong> Schema que define todos los tipos y operaciones
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-gear me-2 text-secondary"></i>
+                                    <strong>Resolvers:</strong> Funciones que determinan cómo obtener los datos
+                                </li>
+                            </ul>
+                            
+                            <h5>Ejemplo para GameZone:</h5>
+                            <pre><code class="language-graphql">query {
+  products(category: "consolas", featured: true) {
+    id
+    name
+    price
+    image
+    # Solo los campos que necesito, no todo el objeto
+  }
+}</code></pre>
+                        </div>
+                        <div class="card-footer">
+                            <h5>Ventajas</h5>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-secondary"><i class="bi bi-check-lg"></i></div>
+                                <div>Evita over-fetching: solo obtienes los datos necesarios</div>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-secondary"><i class="bi bi-check-lg"></i></div>
+                                <div>Reduce múltiples peticiones en una sola consulta</div>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <div class="me-2 text-secondary"><i class="bi bi-check-lg"></i></div>
+                                <div>APIs autodocumentadas mediante introspección</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow mb-5">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-code-slash"></i> Comparativa de Código</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <h4 class="text-info"><i class="bi bi-distribute-horizontal"></i> Caso REST</h4>
+                            <p>Con REST, tu aplicación Vue haría múltiples peticiones:</p>
+                            <pre><code class="language-javascript">// Obtener productos destacados
+axios.get('/api/products?featured=true')
+  
+// Obtener detalles de un producto
+axios.get(`/api/products/${productId}`)
+  
+// Obtener reseñas de un producto
+axios.get(`/api/products/${productId}/reviews`)</code></pre>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4 class="text-secondary"><i class="bi bi-diagram-2"></i> Caso GraphQL</h4>
+                            <p>Con GraphQL, podrías hacer una sola petición:</p>
+                            <pre><code class="language-javascript">const query = `
+  query {
+    featuredProducts {
+      id
+      name
+      price
+      image
+    }
+    product(id: ${productId}) {
+      id
+      name
+      description
+      price
+      stock
+      reviews {
+        id
+        rating
+        comment
+      }
+    }
+  }
+`;
+
+axios.post('/api/graphql', { query })</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-arrow-down-up"></i> Comparativa para eCommerce</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Criterio</th>
+                                <th class="text-info">REST</th>
+                                <th class="text-secondary">GraphQL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Facilidad de implementación</td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star text-warning"></i></td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star text-warning"></i><i class="bi bi-star text-warning"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Eficiencia en transferencia de datos</td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star text-warning"></i><i class="bi bi-star text-warning"></i><i class="bi bi-star text-warning"></i></td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Flexibilidad para UI complejas</td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star text-warning"></i><i class="bi bi-star text-warning"></i><i class="bi bi-star text-warning"></i></td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Caché</td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star text-warning"></i></td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star text-warning"></i><i class="bi bi-star text-warning"></i><i class="bi bi-star text-warning"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Ecosistema y madurez</td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i></td>
+                                <td><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star text-warning"></i><i class="bi bi-star text-warning"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header bg-info text-white">
+                                    <h5 class="mb-0">Elige REST si:</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Tu aplicación tiene necesidades simples y bien definidas</li>
+                                    <li class="list-group-item">Prefieres una arquitectura más tradicional y ampliamente adoptada</li>
+                                    <li class="list-group-item">Necesitas un alto nivel de caché</li>
+                                    <li class="list-group-item">Tu equipo está más familiarizado con REST</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">Elige GraphQL si:</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Tu aplicación tiene una UI compleja con diferentes vistas de los mismos datos</li>
+                                    <li class="list-group-item">Quieres reducir el número de peticiones al servidor</li>
+                                    <li class="list-group-item">Tienes clientes con conexiones lentas donde optimizar el tamaño de respuesta es crucial</li>
+                                    <li class="list-group-item">Necesitas una API muy flexible que evolucione con el tiempo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="section-divider"></div>
+        
+        <!-- Nuxt.js -->
+        <section id="nuxtjs" class="mb-5">
+            <h2 class="display-5 mb-4 nuxt-color">
+                <i class="bi bi-lightning"></i> Nuxt.js: Framework para Aplicaciones Vue.js
+            </h2>
+            
+            <div class="card shadow mb-5">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-info-circle"></i> ¿Qué es Nuxt.js?</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p class="lead">Nuxt.js es un framework de alto nivel construido sobre Vue.js que simplifica el desarrollo de aplicaciones web modernas.</p>
+                            
+                            <p>Abstrae y automatiza muchas configuraciones complejas de Vue.js, proporcionando una estructura de proyecto organizada y añadiendo características avanzadas.</p>
+                            
+                            <div class="alert alert-success">
+                                <i class="bi bi-lightbulb-fill"></i> <strong>Dato clave:</strong> Nuxt.js es especialmente beneficioso para eCommerce por sus capacidades de SEO mejoradas.
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="https://nuxtjs.org/design-kit/colored-logo.svg" alt="Nuxt.js Logo" class="img-fluid p-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="h5 mb-0"><i class="bi bi-display"></i> Modos de renderizado</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <h5><i class="bi bi-server text-success me-2"></i> SSR</h5>
+                                    <p class="mb-0">Server-Side Rendering: Renderiza las páginas en el servidor, mejorando el SEO y el rendimiento inicial.</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5><i class="bi bi-file-earmark-text text-success me-2"></i> SSG</h5>
+                                    <p class="mb-0">Static Site Generation: Pre-renderiza todas las páginas durante el build, ideal para eCommerce con contenido que no cambia frecuentemente.</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5><i class="bi bi-browser-chrome text-success me-2"></i> SPA</h5>
+                                    <p class="mb-0">Single Page Application: Modo tradicional de Vue, todo se renderiza en el cliente.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="h5 mb-0"><i class="bi bi-folder2"></i> Sistema de archivos como API</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Nuxt utiliza una convención de "API por estructura de archivos":</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-file-earmark-text text-primary me-2"></i>
+                                    <strong>Páginas:</strong> Crear un archivo en <code>/pages</code> genera automáticamente una ruta
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-puzzle text-primary me-2"></i>
+                                    <strong>Componentes:</strong> Registro automático de componentes en <code>/components</code>
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-grid-3x3 text-primary me-2"></i>
+                                    <strong>Layouts:</strong> Plantillas reutilizables en <code>/layouts</code>
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-shield-lock text-primary me-2"></i>
+                                    <strong>Middleware:</strong> Funciones que se ejecutan antes de renderizar una página
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-database text-primary me-2"></i>
+                                    <strong>Store:</strong> Configuración automática de Vuex
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 shadow card-hover">
+                        <div class="card-header bg-warning text-dark">
+                            <h3 class="h5 mb-0"><i class="bi bi-speedometer2"></i> Optimización de rendimiento</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-boxes text-warning me-2"></i>
+                                    <strong>División de código automática:</strong> Cada página se convierte en un chunk separado
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-arrow-down-circle text-warning me-2"></i>
+                                    <strong>Carga optimizada de recursos:</strong> Precarga inteligente de recursos
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-image text-warning me-2"></i>
+                                    <strong>Optimización de imágenes:</strong> Componente <code>&lt;nuxt-img&gt;</code> para optimización automática
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-lightning-charge text-warning me-2"></i>
+                                    <strong>Rendimiento mejorado:</strong> Mejor experiencia de usuario y SEO
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow mb-5">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-code-square"></i> Comparación con tu proyecto actual</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h4>Vue.js con Vue Router (GameZone actual)</h4>
+                            <pre><code class="language-javascript">import { createRouter, createWebHistory } from "vue-router";
+import Home from "@/views/Home.vue";
+
+const routes = [
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+    meta: { title: "Inicio - GameZone" },
+  },
+  {
+    path: "/producto/:id",
+    name: "product-detail",
+    component: () => import("@/views/ProductDetail.vue"),
+    meta: { title: "Detalle del Producto - GameZone" },
+  },
+  // Más rutas...
+];</code></pre>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Nuxt.js (Estructura de archivos)</h4>
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <pre class="mb-0"><code class="language-bash">pages/
+  index.vue           # Ruta: /
+  producto/
+    _id.vue           # Ruta: /producto/:id
+  carrito.vue         # Ruta: /carrito
+  checkout.vue        # Ruta: /checkout
+  nosotros.vue        # Ruta: /nosotros</code></pre>
+                                </div>
+                            </div>
+                            <div class="alert alert-info mt-3">
+                                <i class="bi bi-info-circle-fill"></i> Con Nuxt.js, el enrutamiento se genera automáticamente basado en la estructura de archivos.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow mb-5">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-cart4"></i> Beneficios de Nuxt.js para tu eCommerce</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 bg-light">
+                                <div class="card-body">
+                                    <h4 class="card-title"><i class="bi bi-search text-success me-2"></i> Mejor SEO</h4>
+                                    <p class="card-text">Para un eCommerce, el SEO es crucial. Nuxt.js con SSR o SSG mejora significativamente el SEO al proporcionar HTML completo a los motores de búsqueda.</p>
+                                    <div class="alert alert-success">
+                                        <i class="bi bi-graph-up"></i> Mejor posicionamiento = Más tráfico = Más ventas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 bg-light">
+                                <div class="card-body">
+                                    <h4 class="card-title"><i class="bi bi-speedometer text-primary me-2"></i> Mejor rendimiento percibido</h4>
+                                    <p class="card-text">Los usuarios verán el contenido más rápido, lo que puede reducir la tasa de rebote y aumentar las conversiones.</p>
+                                    <div class="alert alert-primary">
+                                        <i class="bi bi-lightning-charge"></i> Cada segundo de mejora en la carga puede aumentar las conversiones en un 7%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 bg-light">
+                                <div class="card-body">
+                                    <h4 class="card-title"><i class="bi bi-folder2-open text-warning me-2"></i> Estructura organizada</h4>
+                                    <p class="card-text">Nuxt impone una estructura de proyecto que facilita el mantenimiento a largo plazo.</p>
+                                    <div class="alert alert-warning">
+                                        <i class="bi bi-people"></i> Facilita la incorporación de nuevos desarrolladores al proyecto
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 bg-light">
+                                <div class="card-body">
+                                    <h4 class="card-title"><i class="bi bi-plug text-danger me-2"></i> Integración con APIs</h4>
+                                    <p class="card-text">Nuxt tiene excelentes herramientas para conectar con APIs REST o GraphQL:</p>
+                                    <pre><code class="language-javascript">// En un componente o página Nuxt
+async asyncData({ $axios }) {
+  const products = await $axios.$get('https://tu-api.com/products')
+  return { products }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header bg-info text-white">
+                            <h4 class="mb-0"><i class="bi bi-puzzle"></i> Módulos oficiales y de la comunidad</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-arrow-repeat text-primary display-5"></i>
+                                            <h5 class="mt-3">@nuxtjs/axios</h5>
+                                            <p class="mb-0">Integración con Axios para peticiones HTTP</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-shield-lock text-success display-5"></i>
+                                            <h5 class="mt-3">@nuxtjs/auth</h5>
+                                            <p class="mb-0">Autenticación simplificada</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-phone text-danger display-5"></i>
+                                            <h5 class="mt-3">@nuxtjs/pwa</h5>
+                                            <p class="mb-0">Convierte tu app en una PWA</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-credit-card text-warning display-5"></i>
+                                            <h5 class="mt-3">nuxt-stripe</h5>
+                                            <p class="mb-0">Integración con Stripe para pagos</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-header bg-dark text-white">
+                            <h3 class="h5 mb-0"><i class="bi bi-arrow-right-circle"></i> ¿Cuándo migrar a Nuxt.js?</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Considera migrar tu proyecto GameZone a Nuxt.js si:</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-search text-success me-2"></i>
+                                    <strong>Necesitas mejor SEO:</strong> Fundamental para un eCommerce
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-speedometer text-success me-2"></i>
+                                    <strong>Quieres mejorar el rendimiento:</strong> Especialmente en dispositivos móviles o conexiones lentas
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-diagram-3 text-success me-2"></i>
+                                    <strong>Tu proyecto está creciendo:</strong> La estructura de Nuxt ayuda a mantener el código organizado
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-gear-wide-connected text-success me-2"></i>
+                                    <strong>Planeas implementar características avanzadas:</strong> Como PWA, internacionalización, etc.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-header bg-dark text-white">
+                            <h3 class="h5 mb-0"><i class="bi bi-arrow-repeat"></i> Proceso de migración</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Migrar de Vue a Nuxt no es trivial pero es factible:</p>
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item d-flex">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Crear un nuevo proyecto Nuxt</div>
+                                        <code>npx create-nuxt-app gamezone-nuxt</code>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Mover componentes</div>
+                                        Trasladar tus componentes Vue a la carpeta <code>/components</code>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Convertir vistas a páginas</div>
+                                        Transformar tus vistas en páginas dentro de <code>/pages</code>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Adaptar el store de Vuex</div>
+                                        Migrar tu store a la estructura de Nuxt en <code>/store</code>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Migrar las rutas</div>
+                                        Adaptar tus rutas a la estructura de archivos de Nuxt
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="h4 mb-0"><i class="bi bi-check-circle"></i> Conclusión</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="lead">Nuxt.js es una excelente opción para un eCommerce como GameZone, especialmente si planeas escalar.</p>
+                            <p>Ofrece mejoras significativas en SEO, rendimiento y estructura de proyecto, manteniendo todas las ventajas de Vue.js que ya estás utilizando.</p>
+                            <div class="alert alert-success">
+                                <i class="bi bi-lightbulb-fill"></i> <strong>Consejo final:</strong> Comienza con un proyecto pequeño en Nuxt.js para familiarizarte con su estructura antes de migrar completamente tu eCommerce.
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <img src="https://nuxtjs.org/design-kit/colored-white-text.svg" alt="Nuxt.js" class="img-fluid p-4" style="max-width: 250px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="section-divider"></div>
+        
+        <!-- Resumen final -->
+        <section id="resumen" class="mb-5">
+            <h2 class="display-5 mb-4 vue-color">
+                <i class="bi bi-check2-all"></i> Resumen: Arquitectura eCommerce con Vue
+            </h2>
+            
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card h-100 bg-light">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-diagram-3 text-success display-1 mb-3"></i>
+                                    <h3>Arquitectura</h3>
+                                    <p>Separa frontend (Vue) y backend (API) para mayor escalabilidad y mantenibilidad.</p>
+                                    <a href="#arquitectura" class="btn btn-outline-success">Ver detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="card h-100 bg-light">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-hdd-network text-primary display-1 mb-3"></i>
+                                    <h3>APIs</h3>
+                                    <p>Elige REST para simplicidad o GraphQL para flexibilidad según tus necesidades.</p>
+                                    <a href="#apis" class="btn btn-outline-primary">Ver detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="card h-100 bg-light">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-lightning text-warning display-1 mb-3"></i>
+                                    <h3>Nuxt.js</h3>
+                                    <p>Considera Nuxt.js para mejorar SEO, rendimiento y estructura de tu eCommerce.</p>
+                                    <a href="#nuxtjs" class="btn btn-outline-warning">Ver detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-5">
+                        <h3 class="mb-4">¿Listo para llevar tu eCommerce al siguiente nivel?</h3>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="https://vuejs.org/" target="_blank" class="btn btn-success btn-lg">
+                                <i class="bi bi-box-arrow-up-right me-2"></i> Documentación Vue
+                            </a>
+                            <a href="https://nuxtjs.org/" target="_blank" class="btn btn-primary btn-lg">
+                                <i class="bi bi-box-arrow-up-right me-2"></i> Documentación Nuxt
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="bi bi-cart4"></i> GameZone Vue</h4>
+                    <p>Guía completa para desarrollar una tienda online moderna con Vue, Vuex, APIs y Nuxt.js</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h5>Recursos adicionales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://vuejs.org/" class="text-white"><i class="bi bi-link-45deg"></i> Vue.js</a></li>
+                        <li><a href="https://vuex.vuejs.org/" class="text-white"><i class="bi bi-link-45deg"></i> Vuex</a></li>
+                        <li><a href="https://nuxtjs.org/" class="text-white"><i class="bi bi-link-45deg"></i> Nuxt.js</a></li>
+                        <li><a href="https://graphql.org/" class="text-white"><i class="bi bi-link-45deg"></i> GraphQL</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">© 2023 GameZone Vue - Guía de Arquitectura eCommerce</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Prism JS for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
