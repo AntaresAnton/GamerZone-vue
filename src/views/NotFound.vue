@@ -26,9 +26,7 @@
             <div class="quick-link">
               <i class="fas fa-gamepad fa-2x text-primary mb-3"></i>
               <h5>Consolas</h5>
-              <router-link to="/" @click="filterByCategory('consolas')"
-                >Ver consolas</router-link
-              >
+              <router-link to="/" @click="filterByCategory('consolas')">Ver consolas</router-link>
             </div>
           </div>
           <div class="col-md-3 col-6">
@@ -44,9 +42,7 @@
             <div class="quick-link">
               <i class="fas fa-desktop fa-2x text-primary mb-3"></i>
               <h5>Monitores</h5>
-              <router-link to="/" @click="filterByCategory('monitores')"
-                >Ver monitores</router-link
-              >
+              <router-link to="/" @click="filterByCategory('monitores')">Ver monitores</router-link>
             </div>
           </div>
           <div class="col-md-3 col-6">
